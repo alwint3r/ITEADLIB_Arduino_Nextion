@@ -1,12 +1,12 @@
 /**
  * @file NexUpload.h
  *
- * The definition of class NexUpload. 
+ * The definition of class NexUpload.
  *
  * @author Chen Zengpeng (email:<zengpeng.chen@itead.cc>)
  * @date 2016/3/29
  *
- * @copyright 
+ * @copyright
  * Copyright (C) 2014-2015 ITEAD Intelligent Systems Co., Ltd. \n
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -21,8 +21,8 @@
 #include "NexHardware.h"
 
 /**
- * @addtogroup CoreAPI 
- * @{ 
+ * @addtogroup CoreAPI
+ * @{
  */
 
 /**
@@ -31,32 +31,32 @@
  */
 class NexUpload
 {
+    Stream* nexSerial;
 public: /* methods */
+    /**
+     * Constructor.
+     *
+     * @param file_name - tft file name.
+     * @param SD_chip_select - sd chip select pin.
+     * @param download_baudrate - set download baudrate.
+     */
+    NexUpload(Stream *stream, const char *file_name,const uint8_t SD_chip_select,uint32_t download_baudrate);
 
     /**
-     * Constructor. 
-     * 
-     * @param file_name - tft file name. 
+     * Constructor.
+     *
+     * @param file_Name - tft file name.
      * @param SD_chip_select - sd chip select pin.
      * @param download_baudrate - set download baudrate.
      */
-    NexUpload(const char *file_name,const uint8_t SD_chip_select,uint32_t download_baudrate);
-    
+    NexUpload(Stream *stream, const String file_Name,const uint8_t SD_chip_select,uint32_t download_baudrate);
+
     /**
-     * Constructor. 
-     * 
-     * @param file_Name - tft file name. 
-     * @param SD_chip_select - sd chip select pin.
-     * @param download_baudrate - set download baudrate.
-     */
-    NexUpload(const String file_Name,const uint8_t SD_chip_select,uint32_t download_baudrate); 
-    
-    /**
-     * destructor. 
-     * 
+     * destructor.
+     *
      */
     ~NexUpload(){}
-    
+
     /*
      * start download.
      *
@@ -67,17 +67,17 @@ public: /* methods */
 private: /* methods */
 
     /*
-     * get communicate baudrate. 
-     * 
+     * get communicate baudrate.
+     *
      * @return communicate baudrate.
      *
      */
     uint16_t _getBaudrate(void);
-    
+
     /*
      * check tft file.
      *
-     * @return true if success, false for failure. 
+     * @return true if success, false for failure.
      */
     bool _checkFile(void);
 
@@ -85,8 +85,8 @@ private: /* methods */
      * search communicate baudrate.
      *
      * @param baudrate - communicate baudrate.
-     *   
-     * @return true if success, false for failure. 
+     *
+     * @return true if success, false for failure.
      */
     bool _searchBaudrate(uint32_t baudrate);
 
@@ -94,18 +94,18 @@ private: /* methods */
      * set download baudrate.
      *
      * @param baudrate - set download baudrate.
-     *   
-     * @return true if success, false for failure. 
+     *
+     * @return true if success, false for failure.
      */
     bool _setDownloadBaudrate(uint32_t baudrate);
-    
+
     /**
-     * start dowload tft file to nextion. 
-     * 
-     * @return none. 
+     * start dowload tft file to nextion.
+     *
+     * @return none.
      */
     bool _downloadTftFile(void);
-    
+
     /*
      * Send command to Nextion.
      *
@@ -116,18 +116,18 @@ private: /* methods */
     void sendCommand(const char* cmd);
 
     /*
-     * Receive string data. 
-     * 
-     * @param buffer - save string data.  
-     * @param timeout - set timeout time. 
+     * Receive string data.
+     *
+     * @param buffer - save string data.
+     * @param timeout - set timeout time.
      * @param recv_flag - if recv_flag is true,will braak when receive 0x05.
      *
      * @return the length of string buffer.
      *
-     */   
+     */
     uint16_t recvRetString(String &string, uint32_t timeout = 100,bool recv_flag = false);
-    
-private: /* data */ 
+
+private: /* data */
     uint32_t _baudrate; /*nextion serail baudrate*/
     const char *_file_name; /*nextion tft file name*/
     File _myFile; /*nextion ftf file*/

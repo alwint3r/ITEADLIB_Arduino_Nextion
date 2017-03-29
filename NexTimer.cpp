@@ -1,11 +1,11 @@
 /**
  * @file NexTimer.cpp
  *
- * The implementation of class NexTimer. 
+ * The implementation of class NexTimer.
  *
  * @author  huang xianming (email:<xianming.huang@itead.cc>)
  * @date    2015/8/26
- * @copyright 
+ * @copyright
  * Copyright (C) 2014-2015 ITEAD Intelligent Systems Co., Ltd. \n
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -15,9 +15,10 @@
 
 #include "NexTimer.h"
 
-NexTimer::NexTimer(uint8_t pid, uint8_t cid, const char *name)
+NexTimer::NexTimer(NexHardware *hw, uint8_t pid, uint8_t cid, const char *name)
     :NexTouch(pid, cid, name)
 {
+    this->hw = hw;
 }
 
 void NexTimer::attachTimer(NexTouchEventCb timer, void *ptr)
@@ -35,8 +36,8 @@ bool NexTimer::getCycle(uint32_t *number)
     String cmd = String("get ");
     cmd += getObjName();
     cmd += ".tim";
-    sendCommand(cmd.c_str());
-    return recvRetNumber(number);
+    hw->sendCommand(cmd.c_str());
+    return hw->recvRetNumber(number);
 }
 
 bool NexTimer::setCycle(uint32_t number)
@@ -52,8 +53,8 @@ bool NexTimer::setCycle(uint32_t number)
     cmd += ".tim=";
     cmd += buf;
 
-    sendCommand(cmd.c_str());
-    return recvRetCommandFinished();
+    hw->sendCommand(cmd.c_str());
+    return hw->recvRetCommandFinished();
 }
 
 
@@ -66,8 +67,8 @@ bool NexTimer::enable(void)
     cmd += ".en=";
     cmd += buf;
 
-    sendCommand(cmd.c_str());
-    return recvRetCommandFinished();
+    hw->sendCommand(cmd.c_str());
+    return hw->recvRetCommandFinished();
 }
 
 bool NexTimer::disable(void)
@@ -79,8 +80,8 @@ bool NexTimer::disable(void)
     cmd += ".en=";
     cmd += buf;
 
-    sendCommand(cmd.c_str());
-    return recvRetCommandFinished();
+    hw->sendCommand(cmd.c_str());
+    return hw->recvRetCommandFinished();
 }
 
 uint32_t NexTimer::Get_cycle_tim(uint32_t *number)
@@ -88,8 +89,8 @@ uint32_t NexTimer::Get_cycle_tim(uint32_t *number)
     String cmd = String("get ");
     cmd += getObjName();
     cmd += ".tim";
-    sendCommand(cmd.c_str());
-    return recvRetNumber(number);
+    hw->sendCommand(cmd.c_str());
+    return hw->recvRetNumber(number);
 }
 
 bool NexTimer::Set_cycle_tim(uint32_t number)
@@ -104,12 +105,12 @@ bool NexTimer::Set_cycle_tim(uint32_t number)
     cmd += getObjName();
     cmd += ".tim=";
     cmd += buf;
-    sendCommand(cmd.c_str());
-	
+    hw->sendCommand(cmd.c_str());
+
     cmd = "";
     cmd += "ref ";
     cmd += getObjName();
-    sendCommand(cmd.c_str());
-    return recvRetCommandFinished();
+    hw->sendCommand(cmd.c_str());
+    return hw->recvRetCommandFinished();
 }
 

@@ -1,12 +1,12 @@
 /**
  * @file NexButton.h
  *
- * The definition of class NexButton. 
+ * The definition of class NexButton.
  *
  * @author huang xiaoming (email:<xiaoming.huang@itead.cc>)
  * @date 2016/9/13
  *
- * @copyright 
+ * @copyright
  * Copyright (C) 2014-2015 ITEAD Intelligent Systems Co., Ltd. \n
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -20,52 +20,53 @@
 #include "NexTouch.h"
 #include "NexHardware.h"
 /**
- * @addtogroup Component 
- * @{ 
+ * @addtogroup Component
+ * @{
  */
 
 /**
- * NexButton component. 
+ * NexButton component.
  *
  * Commonly, you want to do something after push and pop it. It is recommanded that only
- * call @ref NexTouch::attachPop to satisfy your purpose. 
- * 
- * @warning Please do not call @ref NexTouch::attachPush on this component, even though you can. 
+ * call @ref NexTouch::attachPop to satisfy your purpose.
+ *
+ * @warning Please do not call @ref NexTouch::attachPush on this component, even though you can.
  */
 class NexVariable: public NexTouch
 {
+    NexHardware *hw;
 public: /* methods */
 
     /**
      * @copydoc NexObject::NexObject(uint8_t pid, uint8_t cid, const char *name);
      */
-    NexVariable(uint8_t pid, uint8_t cid, const char *name);
+    NexVariable(NexHardware *hw, uint8_t pid, uint8_t cid, const char *name);
 
     /**
      * Get text attribute of component.
      *
-     * @param buffer - buffer storing text returned. 
-     * @param len - length of buffer. 
-     * @return The real length of text returned. 
+     * @param buffer - buffer storing text returned.
+     * @param len - length of buffer.
+     * @return The real length of text returned.
      */
-    uint32_t getText(char *buffer, uint32_t len);    
+    uint32_t getText(char *buffer, uint32_t len);
 
     /**
      * Set text attribute of component.
      *
-     * @param buffer - text buffer terminated with '\0'. 
-     * @return true if success, false for failure. 
+     * @param buffer - text buffer terminated with '\0'.
+     * @return true if success, false for failure.
      */
-    bool setText(const char *buffer);    
-	
+    bool setText(const char *buffer);
+
     /**
      * Get val attribute of component
      *
      * @param number - buffer storing data retur
-     * @return the length of the data 
+     * @return the length of the data
      */
     uint32_t getValue(uint32_t *number);
-	
+
     /**
      * Set val attribute of component
      *

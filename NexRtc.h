@@ -1,12 +1,12 @@
 /**
  * @file NexRtc.h
  *
- * The definition of class NexRtc. 
+ * The definition of class NexRtc.
  *
  * @author Wu Pengfei (email:<pengfei.wu@itead.cc>)
  * @date 2015/8/13
  *
- * @copyright 
+ * @copyright
  * Copyright (C) 2014-2015 ITEAD Intelligent Systems Co., Ltd. \n
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -16,12 +16,12 @@
 
 #ifndef _NEXRTC_H
 #define _NEXRTC_H
-     
+
 #include "NexTouch.h"
 #include "NexHardware.h"
 /**
- * @addtogroup Component 
- * @{ 
+ * @addtogroup Component
+ * @{
  */
 
 /**
@@ -30,10 +30,12 @@
 
 class NexRtc
 {
-    public:
+    NexHardware *hw;
+public:
+    NexRtc(NexHardware *hw);
 
     bool write_rtc_time(char *time);
-    
+
     /**
      * write rtc times
      *
@@ -41,19 +43,19 @@ class NexRtc
      * @param number - the time value
      * @return true if success, false for failure
      */
-    
+
     bool write_rtc_time(char *time_type,uint32_t number);
-    
+
     /**
      * write rtc times
      *
      * @param time - Time to write to the array
      * @return true if success, false for failure
      */
-    
+
     bool write_rtc_time(uint32_t *time);
-    
-    
+
+
     /**
      * read rtc time
      *
@@ -61,19 +63,19 @@ class NexRtc
      * @param len - len of array
      * @return true if success, false for failure
      */
-    
+
     uint32_t read_rtc_time(char *time,uint32_t len);
-    
+
     /**
      * read rtc times
      *
-     * @param time_type - To type in time   
+     * @param time_type - To type in time
      * @param number - the time value
      * @return true if success, false for failure
      */
-    
+
     uint32_t read_rtc_time(char *time_type,uint32_t *number);
-    
+
     /**
      * read rtc time
      *
@@ -81,9 +83,9 @@ class NexRtc
      * @param len - len of array
      * @return true if success, false for failure
      */
-    
+
     uint32_t read_rtc_time(uint32_t *time,uint32_t len);
-    
+
 };
 
 /**

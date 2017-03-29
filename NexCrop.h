@@ -1,12 +1,12 @@
 /**
  * @file NexCrop.h
  *
- * The definition of class NexCrop. 
+ * The definition of class NexCrop.
  *
  * @author Wu Pengfei (email:<pengfei.wu@itead.cc>)
  * @date 2015/8/13
  *
- * @copyright 
+ * @copyright
  * Copyright (C) 2014-2015 ITEAD Intelligent Systems Co., Ltd. \n
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -20,59 +20,60 @@
 #include "NexTouch.h"
 #include "NexHardware.h"
 /**
- * @addtogroup Component 
- * @{ 
+ * @addtogroup Component
+ * @{
  */
 
 /**
- * NexCrop component. 
+ * NexCrop component.
  */
 class NexCrop: public NexTouch
 {
+    NexHardware *hw;
 public: /* methods */
 
     /**
      * @copydoc NexObject::NexObject(uint8_t pid, uint8_t cid, const char *name);
      */
-    NexCrop(uint8_t pid, uint8_t cid, const char *name);
+    NexCrop(NexHardware *hw, uint8_t pid, uint8_t cid, const char *name);
 
     /**
-     * Get the number of picture. 
+     * Get the number of picture.
      *
-     * @param number - an output parameter to save the number of picture. 
-     * 
-     * @retval true - success. 
-     * @retval false - failed. 
+     * @param number - an output parameter to save the number of picture.
+     *
+     * @retval true - success.
+     * @retval false - failed.
      */
     bool Get_background_crop_picc(uint32_t *number);
-    
+
     /**
-     * Set the number of picture. 
+     * Set the number of picture.
      *
-     * @param number - the number of picture. 
-     * 
-     * @retval true - success. 
-     * @retval false - failed. 
+     * @param number - the number of picture.
+     *
+     * @retval true - success.
+     * @retval false - failed.
      */
     bool Set_background_crop_picc(uint32_t number);
-	
+
 	/**
-     * Get the number of picture. 
+     * Get the number of picture.
      *
-     * @param number - an output parameter to save the number of picture. 
-     * 
-     * @retval true - success. 
-     * @retval false - failed. 
+     * @param number - an output parameter to save the number of picture.
+     *
+     * @retval true - success.
+     * @retval false - failed.
      */
     bool getPic(uint32_t *number);
-    
+
     /**
-     * Set the number of picture. 
+     * Set the number of picture.
      *
-     * @param number - the number of picture. 
-     * 
-     * @retval true - success. 
-     * @retval false - failed. 
+     * @param number - the number of picture.
+     *
+     * @retval true - success.
+     * @retval false - failed.
      */
     bool setPic(uint32_t number);
 };

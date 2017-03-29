@@ -1,12 +1,12 @@
 /**
  * @file NexGpio.h
  *
- * The definition of class NexGpio. 
+ * The definition of class NexGpio.
  *
  * @author Wu Pengfei (email:<pengfei.wu@itead.cc>)
  * @date 2015/8/13
  *
- * @copyright 
+ * @copyright
  * Copyright (C) 2014-2015 ITEAD Intelligent Systems Co., Ltd. \n
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -16,12 +16,12 @@
 
 #ifndef _NEXGPIO_H
 #define _NEXGPIO_H
-     
+
 #include "NexTouch.h"
 #include "NexHardware.h"
 /**
- * @addtogroup Component 
- * @{ 
+ * @addtogroup Component
+ * @{
  */
 
 /**
@@ -30,7 +30,9 @@
 
 class NexGpio
 {
+    NexHardware *hw;
 public:
+    NexGpio(NexHardware *hw);
     /**
      * Set gpio mode
      *
@@ -43,9 +45,9 @@ public:
      * @param control_id - nextion controls id ,when the modeel is 1 to be valid
      * @return true if success, false for failure
      */
-    
+
     bool pin_mode(uint32_t port,uint32_t mode,uint32_t control_id);
-    
+
     /**
      * write a  HIGH or a LOW value to a digital pin
      *
@@ -53,18 +55,18 @@ public:
      * @param value - HIGH or LOW
      * @return true if success, false for failure
      */
-    
+
     bool digital_write(uint32_t port,uint32_t value);
-    
+
     /**
      * read a HIGH or a LOW value to a digital pin
      *
      * @param port - the gpio port number
-     * @return the value from a specified digital pin, either high or low 
+     * @return the value from a specified digital pin, either high or low
      */
-    
+
     uint32_t digital_read(uint32_t port);
-    
+
     /**
      * writes an analog value (PWM wave) to a pin
      *
@@ -72,31 +74,31 @@ public:
      * @param value - the duty cycle: between 0 (always off) and 100 (always on).
      * @return true if success, false for failure
      */
-    
+
     bool analog_write(uint32_t port,uint32_t value);
-    
+
     /**
      * writes pwm output frequency
      *
      * @param value - the frequency: between 1 and 65535
      * @return true if success, false for failure
      */
-    
+
     bool set_pwmfreq(uint32_t value);
-    
+
     /**
      * read pwm output frequency
      *
      * @param number - the frequency
      * @return true if success, false for failure
      */
-    
+
     uint32_t get_pwmfreq(uint32_t *number);
-     
+
 };
-    
+
 /**
  * @}
- */    
-    
+ */
+
 #endif /* #ifndef __NEXGPIO_H__ */

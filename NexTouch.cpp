@@ -1,11 +1,11 @@
 /**
  * @file NexTouch.cpp
  *
- * The implementation of class NexTouch. 
+ * The implementation of class NexTouch.
  *
  * @author  Wu Pengfei (email:<pengfei.wu@itead.cc>)
  * @date    2015/8/13
- * @copyright 
+ * @copyright
  * Copyright (C) 2014-2015 ITEAD Intelligent Systems Co., Ltd. \n
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -44,7 +44,7 @@ void NexTouch::attachPop(NexTouchEventCb pop, void *ptr)
 
 void NexTouch::detachPop(void)
 {
-    this->__cb_pop = NULL;    
+    this->__cb_pop = NULL;
     this->__cbpop_ptr = NULL;
 }
 
@@ -73,7 +73,7 @@ void NexTouch::iterate(NexTouch **list, uint8_t pid, uint8_t cid, int32_t event)
     {
         return;
     }
-    
+
     for(i = 0; (e = list[i]) != NULL; i++)
     {
         if (e->getObjPid() == pid && e->getObjCid() == cid)
@@ -87,7 +87,7 @@ void NexTouch::iterate(NexTouch **list, uint8_t pid, uint8_t cid, int32_t event)
             {
                 e->pop();
             }
-            
+
             break;
         }
     }

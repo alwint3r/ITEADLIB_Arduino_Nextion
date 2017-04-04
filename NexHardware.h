@@ -31,8 +31,9 @@
 
 class NexHardware {
   Stream* nexSerial;
+  Stream* debugSerial = nullptr;
 public:
-  NexHardware(Stream* hw);
+  NexHardware(Stream* hw, Stream* dbSerial = nullptr);
   bool nexInit(void);
 
   /**
@@ -56,5 +57,24 @@ public:
   uint16_t recvRetString(char *buffer, uint16_t len, uint32_t timeout = 100);
   void sendCommand(const char* cmd);
   bool recvRetCommandFinished(uint32_t timeout = 100);
+
+  template<typename T>
+  void debugPrintln(T any) {
+    if (debugSerial == nullptr) {
+      return;
+    }
+
+    debugSerial->println(any);
+  }
+
+  template<typename T>
+  void debugPrint(T any) {
+    if (debugSerial == nullptr) {
+      return;
+    }
+
+    debugSerial->print(any);
+  }
+
 };
 #endif /* #ifndef __NEXHARDWARE_H__ */

@@ -1,11 +1,11 @@
 /**
  * @file NexObject.cpp
  *
- * The implementation of class NexObject. 
+ * The implementation of class NexObject.
  *
  * @author  Wu Pengfei (email:<pengfei.wu@itead.cc>)
  * @date    2015/8/13
- * @copyright 
+ * @copyright
  * Copyright (C) 2014-2015 ITEAD Intelligent Systems Co., Ltd. \n
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as

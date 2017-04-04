@@ -32,7 +32,7 @@
 #define NEX_RET_INVALID_VARIABLE        (0x1A)
 #define NEX_RET_INVALID_OPERATION       (0x1B)
 
-NexHardware::NexHardware(Stream* hw) : nexSerial(hw)
+NexHardware::NexHardware(Stream* hw, Stream* dbSerial) : nexSerial(hw), debugSerial(dbSerial)
 {
 }
 
@@ -77,12 +77,12 @@ __return:
 
     if (ret)
     {
-        dbSerialPrint("recvRetNumber :");
-        dbSerialPrintln(*number);
+        debugPrint("recvRetNumber :");
+        debugPrintln(*number);
     }
     else
     {
-        dbSerialPrintln("recvRetNumber err");
+        debugPrintln("recvRetNumber err");
     }
 
     return ret;
@@ -152,11 +152,11 @@ uint16_t NexHardware::recvRetString(char *buffer, uint16_t len, uint32_t timeout
 
 __return:
 
-    dbSerialPrint("recvRetString[");
-    dbSerialPrint(temp.length());
-    dbSerialPrint(",");
-    dbSerialPrint(temp);
-    dbSerialPrintln("]");
+    debugPrint("recvRetString[");
+    debugPrint(temp.length());
+    debugPrint(",");
+    debugPrint(temp);
+    debugPrintln("]");
 
     return ret;
 }
@@ -211,11 +211,11 @@ bool NexHardware::recvRetCommandFinished(uint32_t timeout)
 
     if (ret)
     {
-        dbSerialPrintln("recvRetCommandFinished ok");
+        debugPrintln("recvRetCommandFinished ok");
     }
     else
     {
-        dbSerialPrintln("recvRetCommandFinished err");
+        debugPrintln("recvRetCommandFinished err");
     }
 
     return ret;
@@ -237,6 +237,8 @@ bool NexHardware::nexInit(void)
 void NexHardware::nexLoop(NexTouch *nex_listen_list[])
 {
     static uint8_t __buffer[10];
+    char dbgBuf[255];
+    memset(dbgBuf, 0, 255);
 
     uint16_t i;
     uint8_t c;
@@ -244,24 +246,27 @@ void NexHardware::nexLoop(NexTouch *nex_listen_list[])
     while (nexSerial->available() > 0)
     {
         delay(10);
-        c = nexSerial->read();
 
-        if (NEX_RET_EVENT_TOUCH_HEAD == c)
-        {
-            if (nexSerial->available() >= 6)
-            {
-                __buffer[0] = c;
-                for (i = 1; i < 7; i++)
-                {
-                    __buffer[i] = nexSerial->read();
-                }
-                __buffer[i] = 0x00;
+        if (nexSerial->available() >= 6) {
+            for (i = 0; i < 8; i++) {
+                __buffer[i] = nexSerial->read();
+            }
 
-                if (0xFF == __buffer[4] && 0xFF == __buffer[5] && 0xFF == __buffer[6])
-                {
+            __buffer[i] = 0x00;
+
+            int j = 0;
+            for (j = 0; j < 8; j++) {
+                sprintf(dbgBuf, "0x%x", (uint16_t)__buffer[j]);
+                debugPrint(dbgBuf);
+                debugPrint(" ");
+            }
+
+            debugPrintln("");
+
+            if (NEX_RET_EVENT_TOUCH_HEAD == __buffer[0]) {
+                if (0xFF == __buffer[4] && 0xFF == __buffer[5] && 0xFF == __buffer[6]) {
                     NexTouch::iterate(nex_listen_list, __buffer[1], __buffer[2], (int32_t)__buffer[3]);
                 }
-
             }
         }
     }

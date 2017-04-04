@@ -234,7 +234,7 @@ bool NexHardware::nexInit(void)
     return ret1 && ret2;
 }
 
-void NexHardware::nexLoop(NexTouch *nex_listen_list[])
+void NexHardware::nexLoop(std::vector<NexTouch*> nex_listen_list)
 {
     static uint8_t __buffer[10];
     char dbgBuf[255];

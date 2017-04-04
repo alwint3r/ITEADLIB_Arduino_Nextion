@@ -17,6 +17,7 @@
 #include <Arduino.h>
 #include "NexConfig.h"
 #include "NexTouch.h"
+#include <vector>
 
 /**
  * @addtogroup CoreAPI
@@ -47,7 +48,7 @@ public:
    * @warning This function must be called repeatedly to response touch events
    *  from Nextion touch panel. Actually, you should place it in your loop function.
    */
-  void nexLoop(NexTouch *nex_listen_list[]);
+  void nexLoop(std::vector<NexTouch*> nex_listen_list);
 
   /**
    * @}

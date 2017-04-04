@@ -7,53 +7,24 @@
 # Introduction
 
 Nextion Arduino library provides an easy-to-use way to manipulate Nextion serial
-displays. Users can use the libarry freely, either in commerical projects or 
-open-source prjects,  without any additional condiitons. 
+displays. Users can use the libarry freely, either in commerical projects or
+open-source prjects,  without any additional condiitons.
 
-For more information about the Nextion display project, please visit 
-[the wiki。](http://wiki.iteadstudio.com/Nextion_HMI_Solution)  
-The wiki provdies all the necessary technical documnets, quick start guide, 
+For more information about the Nextion display project, please visit
+[the wiki。](http://wiki.iteadstudio.com/Nextion_HMI_Solution)
+The wiki provdies all the necessary technical documnets, quick start guide,
 tutorials, demos, as well as some useful resources.
 
-To get your Nextion display, please visit 
+To get your Nextion display, please visit
 [iMall.](http://imall.itead.cc/display/nextion.html)
 
-To discuss the project?  Request new features?  Report a BUG? please visit the 
+To discuss the project?  Request new features?  Report a BUG? please visit the
 [Forums](http://support.iteadstudio.com/discussions/1000058038)
-
-# Download Source Code 
-
-Latest version is unstable and a mass of change may be applied in a short time 
-without any notification for users. Commonly, it is for developers of this 
-library. 
-
-**Release version is recommanded for you, unless you are one of developers of this 
-library.**
-
-**Release notes** is at
-<https://github.com/itead/ITEADLIB_Arduino_Nextion/blob/master/release_notes.md>.
-
-## Latest(unstable)
-
-Latest source code(master branch) can be downloaded:
-  <https://github.com/itead/ITEADLIB_Arduino_Nextion/archive/master.zip>. 
-
-You can also clone it via git:
-
-    git clone https://github.com/itead/ITEADLIB_Arduino_Nextion
-
-## Releases(stable)
-
-  - https://github.com/itead/ITEADLIB_Arduino_Nextion/archive/v0.7.0.zip
-  - https://github.com/itead/ITEADLIB_Arduino_Nextion/archive/v0.7.0.tar.gz
-
-All releases can be available from:
-<https://github.com/itead/ITEADLIB_Arduino_Nextion/releases>.
 
 # Documentation
 
 Offline Documentation's entry `doc/Documentation/index.html` shiped with source code
-can be open in your browser such as Chrome, Firefox or any one you like. 
+can be open in your browser such as Chrome, Firefox or any one you like.
 
 # Suppported Mainboards
 
@@ -65,38 +36,52 @@ For example:
   - Iteaduino UNO
   - Arduino MEGA2560
   - Arduino UNO
+  - Nano32 (Theoretically, all ESP32-based boards should be supported)
 
 # Configuration
 
-In configuration file NexConfig.h, you can find two macros below:
-
-  - dbSerial: Debug Serial (baudrate:9600), needed by beginners for debug your 
-    nextion applications or sketches. If your complete your work, it will be a 
-    wise choice to disable Debug Serial.
-
-  - nexSerial: Nextion Serial, the bridge of Nextion and your mainboard.
-
-**Note:** the default configuration is for MEGA2560.
-
-## Redirect dbSerial and nexSerial
-
-If you want to change the default serial to debug or communicate with Nextion ,
-you need to modify the line in configuration file:
-
-	#define dbSerial Serial    ---> #define dbSerial Serialxxx
-    #define nexSerial Serial2  ---> #define nexSeria Serialxxx
-
-## Disable Debug Serial
-
-If you want to disable the debug information,you need to modify the line in 
-configuration file:
-
-    #define DEBUG_SERIAL_ENABLE ---> //#define DEBUG_SERIAL_ENABLE
+Most of Nextion hardware communicates with serial using 9600 as baudrate. So, you have to initialize the serial object with that baudrate.
 
 # UNO-like Mainboards
 
-If your board has only one hardware serial, such as UNO, you should disable 
-dbSerial and redirect nexSerial to Serial(Refer to section:`Serial configuration`). 
+If your board has only one hardware serial, such as UNO, you should disable
+dbSerial and redirect nexSerial to Serial(Refer to section:`Serial configuration`).
+
+# Example Usage
+
+```arduino
+#include "Arduino.h"
+#include "HardwareSerial.h"
+#include "Nextion.h"
+
+HardwareSerial nextionSerial(1);
+NexHardware nextion(&nextionSerial, &Serial);
+NexButton btn(&nextion, 0, 1, "b0");
+NexTouch* nex_listen_list[] = {
+  &btn,
+  NULL,
+};
+
+void btn0PopCallback(void *ptr) {
+  Serial.println("Button 0 is touched");
+}
+
+void setup() {
+  Serial.begin(115200);
+  nextionSerial.begin(9600, SERIAL_8N1);
+
+  if (!nextion.nexInit()) {
+    Serial.println("Failed to initialize Nextion Hardware");
+  }
+
+  btn.attachPop(btn0PopCallback, &btn);
+}
+
+void loop() {
+  nextion.nexLoop(nex_listen_list);
+}
+
+```
 
 # Useful Links
 
@@ -107,12 +92,12 @@ dbSerial and redirect nexSerial to Serial(Refer to section:`Serial configuration
 -------------------------------------------------------------------------------
 
 
-    The MIT License (MIT) 
+    The MIT License (MIT)
 
-    Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions: 
-    
+    Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
     The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-    
+
     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 

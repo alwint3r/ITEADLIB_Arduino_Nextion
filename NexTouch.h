@@ -21,6 +21,7 @@
 #include "NexConfig.h"
 #include "NexObject.h"
 #include <vector>
+#include <functional>
 
 /**
  * @addtogroup TouchEvent
@@ -43,7 +44,8 @@
  * @param ptr - user pointer for any purpose. Commonly, it is a pointer to a object.
  * @return none.
  */
-typedef void (*NexTouchEventCb)(void *ptr);
+// typedef void (*NexTouchEventCb)(void *ptr);
+typedef std::function<void(void*)> NexTouchEventCb;
 
 /**
  * Father class of the components with touch events.

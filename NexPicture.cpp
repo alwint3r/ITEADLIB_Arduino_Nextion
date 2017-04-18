@@ -15,11 +15,8 @@
 
 #include "NexPicture.h"
 
-NexPicture::NexPicture(NexHardware *hw, uint8_t pid, uint8_t cid, const char *name)
-    :NexTouch(pid, cid, name)
-{
-    this->hw = hw;
-}
+NexPicture::NexPicture(NexHardware *hw, uint8_t pid, uint8_t cid, const char *name):
+NexVisibleObject(hw, pid, cid, name) {}
 
 bool NexPicture::Get_background_image_pic(uint32_t *number)
 {

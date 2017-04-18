@@ -14,11 +14,8 @@
  */
 #include "NexScrolltext.h"
 
-NexScrolltext::NexScrolltext(NexHardware *hw, uint8_t pid, uint8_t cid, const char *name)
-    :NexTouch(pid, cid, name)
-{
-    this->hw = hw;
-}
+NexScrolltext::NexScrolltext(NexHardware *hw, uint8_t pid, uint8_t cid, const char *name):
+NexVisibleObject(hw, pid, cid, name) {}
 
 uint16_t NexScrolltext::getText(char *buffer, uint16_t len)
 {

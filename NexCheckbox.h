@@ -17,7 +17,7 @@
 #ifndef __NEXCHECKBOX_H__
 #define __NEXCHECKBOX_H__
 
-#include "NexTouch.h"
+#include "NexVisibleObject.h"
 #include "NexHardware.h"
 /**
  * @addtogroup Component
@@ -32,9 +32,7 @@
  *
  * @warning Please do not call @ref NexTouch::attachPush on this component, even though you can.
  */
-class NexCheckbox: public NexTouch
-{
-    NexHardware *hw;
+class NexCheckbox: public NexVisibleObject {
 public: /* methods */
 
     /**

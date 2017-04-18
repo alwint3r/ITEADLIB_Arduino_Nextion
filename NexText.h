@@ -17,7 +17,7 @@
 #ifndef __NEXTEXT_H__
 #define __NEXTEXT_H__
 
-#include "NexTouch.h"
+#include "NexVisibleObject.h"
 #include "NexHardware.h"
 /**
  * @addtogroup Component
@@ -27,9 +27,8 @@
 /**
  * NexText component.
  */
-class NexText: public NexTouch
-{
-    NexHardware *hw;
+class NexText : public NexVisibleObject {
+
 public: /* methods */
     /**
      * @copydoc NexObject::NexObject(uint8_t pid, uint8_t cid, const char *name);

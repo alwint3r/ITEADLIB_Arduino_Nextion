@@ -17,7 +17,7 @@
 #ifndef __NEXRADIO_H__
 #define __NEXRADIO_H__
 
-#include "NexTouch.h"
+#include "NexVisibleObject.h"
 #include "NexHardware.h"
 /**
  * @addtogroup Component
@@ -32,9 +32,7 @@
  *
  * @warning Please do not call @ref NexTouch::attachPush on this component, even though you can.
  */
-class NexRadio:public NexTouch
-{
-    NexHardware *hw;
+class NexRadio:public NexVisibleObject {
 public: /* methods */
 
     /**

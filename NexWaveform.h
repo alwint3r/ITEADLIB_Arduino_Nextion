@@ -16,7 +16,7 @@
 #ifndef __NEXWAVEFORM_H__
 #define __NEXWAVEFORM_H__
 
-#include "NexTouch.h"
+#include "NexVisibleObject.h"
 #include "NexHardware.h"
 /**
  * @addtogroup Component
@@ -26,9 +26,7 @@
 /**
  * NexWaveform component.
  */
-class NexWaveform: public NexObject
-{
-    NexHardware *hw;
+class NexWaveform: public NexVisibleObject {
 public: /* methods */
     /**
      * @copydoc NexObject::NexObject(uint8_t pid, uint8_t cid, const char *name);

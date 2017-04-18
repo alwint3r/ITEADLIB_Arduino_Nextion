@@ -15,11 +15,8 @@
 
 #include "NexProgressBar.h"
 
-NexProgressBar::NexProgressBar(NexHardware *hw, uint8_t pid, uint8_t cid, const char *name)
-    :NexObject(pid, cid, name)
-{
-    this->hw = hw;
-}
+NexProgressBar::NexProgressBar(NexHardware *hw, uint8_t pid, uint8_t cid, const char *name):
+NexVisibleObject(hw, pid, cid, name) {}
 
 bool NexProgressBar::getValue(uint32_t *number)
 {

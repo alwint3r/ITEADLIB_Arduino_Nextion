@@ -17,7 +17,7 @@
 #ifndef __NEXCROP_H__
 #define __NEXCROP_H__
 
-#include "NexTouch.h"
+#include "NexVisibleObject.h"
 #include "NexHardware.h"
 /**
  * @addtogroup Component
@@ -27,9 +27,7 @@
 /**
  * NexCrop component.
  */
-class NexCrop: public NexTouch
-{
-    NexHardware *hw;
+class NexCrop: public NexVisibleObject {
 public: /* methods */
 
     /**

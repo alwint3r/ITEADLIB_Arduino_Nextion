@@ -17,7 +17,7 @@
 #ifndef __NEXSLIDER_H__
 #define __NEXSLIDER_H__
 
-#include "NexTouch.h"
+#include "NexVisibleObject.h"
 #include "NexHardware.h"
 /**
  * @addtogroup Component
@@ -27,9 +27,7 @@
 /**
  * NexSlider component.
  */
-class NexSlider: public NexTouch
-{
-    NexHardware *hw;
+class NexSlider: public NexVisibleObject {
 public: /* methods */
     /**
      * @copydoc NexObject::NexObject(uint8_t pid, uint8_t cid, const char *name);

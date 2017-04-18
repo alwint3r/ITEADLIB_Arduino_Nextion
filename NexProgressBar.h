@@ -17,7 +17,7 @@
 #ifndef __NEXPROGRESSBAR_H__
 #define __NEXPROGRESSBAR_H__
 
-#include "NexTouch.h"
+#include "NexVisibleObject.h"
 #include "NexHardware.h"
 /**
  * @addtogroup Component
@@ -27,9 +27,7 @@
 /**
  * NexProgressBar component.
  */
-class NexProgressBar: public NexObject
-{
-    NexHardware *hw;
+class NexProgressBar: public NexVisibleObject {
 public: /* methods */
     /**
      * @copydoc NexObject::NexObject(uint8_t pid, uint8_t cid, const char *name);

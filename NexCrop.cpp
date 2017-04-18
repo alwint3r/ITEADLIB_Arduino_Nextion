@@ -15,11 +15,8 @@
 
 #include "NexCrop.h"
 
-NexCrop::NexCrop(NexHardware *hw, uint8_t pid, uint8_t cid, const char *name)
-    :NexTouch(pid, cid, name)
-{
-    this->hw = hw;
-}
+NexCrop::NexCrop(NexHardware *hw, uint8_t pid, uint8_t cid, const char *name):
+NexVisibleObject(hw, pid, cid, name) {}
 
 bool NexCrop::Get_background_crop_picc(uint32_t *number)
 {

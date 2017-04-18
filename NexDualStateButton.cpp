@@ -15,11 +15,8 @@
 
 #include "NexDualStateButton.h"
 
-NexDSButton::NexDSButton(NexHardware *hw, uint8_t pid, uint8_t cid, const char *name)
-    :NexTouch(pid, cid, name)
-{
-    this->hw = hw;
-}
+NexDSButton::NexDSButton(NexHardware *hw, uint8_t pid, uint8_t cid, const char *name):
+NexVisibleObject(hw, pid, cid, name) {}
 
 bool NexDSButton::getValue(uint32_t *number)
 {

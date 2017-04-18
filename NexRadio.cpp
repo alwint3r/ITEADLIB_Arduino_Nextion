@@ -14,11 +14,8 @@
  */
 #include "NexRadio.h"
 
-NexRadio::NexRadio(NexHardware *hw, uint8_t pid, uint8_t cid, const char *name)
-    :NexTouch(pid, cid, name)
-{
-    this->hw = hw;
-}
+NexRadio::NexRadio(NexHardware *hw, uint8_t pid, uint8_t cid, const char *name):
+NexVisibleObject(hw, pid, cid, name) {}
 
 uint32_t NexRadio::getValue(uint32_t *number)
 {

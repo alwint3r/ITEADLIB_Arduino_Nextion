@@ -15,10 +15,7 @@
 #include "NexText.h"
 
 NexText::NexText(NexHardware *hw, uint8_t pid, uint8_t cid, const char *name)
-    :NexTouch(pid, cid, name)
-{
-    this->hw = hw;
-}
+    : NexVisibleObject(hw, pid, cid, name) {}
 
 uint16_t NexText::getText(char *buffer, uint16_t len)
 {

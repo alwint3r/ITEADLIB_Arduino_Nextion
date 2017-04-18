@@ -14,11 +14,8 @@
  */
 #include "NexSlider.h"
 
-NexSlider::NexSlider(NexHardware *hw, uint8_t pid, uint8_t cid, const char *name)
-    :NexTouch(pid, cid, name)
-{
-    this->hw = hw;
-}
+NexSlider::NexSlider(NexHardware *hw, uint8_t pid, uint8_t cid, const char *name):
+NexVisibleObject(hw, pid, cid, name) {}
 
 bool NexSlider::getValue(uint32_t *number)
 {

@@ -17,7 +17,7 @@
 #ifndef __NEXBUTTON_H__
 #define __NEXBUTTON_H__
 
-#include "NexTouch.h"
+#include "NexVisibleObject.h"
 #include "NexHardware.h"
 /**
  * @addtogroup Component
@@ -32,9 +32,7 @@
  *
  * @warning Please do not call @ref NexTouch::attachPush on this component, even though you can.
  */
-class NexButton: public NexTouch
-{
-    NexHardware *hw;
+class NexButton: public NexVisibleObject {
 public: /* methods */
 
     /**

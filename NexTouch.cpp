@@ -64,13 +64,13 @@ void NexTouch::pop(void)
     }
 }
 
-void NexTouch::iterate(std::vector<NexTouch*> v, uint8_t pid, uint8_t cid, int32_t event)
+void NexTouch::iterate(NexTouchVector* touchVector, uint8_t pid, uint8_t cid, int32_t event)
 {
     NexTouch *e = NULL;
     uint16_t i = 0;
 
-    for (i = 0; i < v.size(); i++) {
-        e = v.at(i);
+    for (i = 0; i < touchVector->size(); i++) {
+        e = touchVector->at(i);
 
         if (e->getObjPid() == pid && e->getObjCid() == cid) {
             e->printObjInfo();

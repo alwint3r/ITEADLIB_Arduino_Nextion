@@ -56,7 +56,8 @@ typedef std::function<void(void*)> NexTouchEventCb;
 class NexTouch: public NexObject
 {
 public: /* static methods */
-    static void iterate(std::vector<NexTouch*> v, uint8_t pid, uint8_t cid, int32_t event);
+    typedef std::vector<NexTouch*> NexTouchVector;
+    static void iterate(std::vector<NexTouch*>* touchVector, uint8_t pid, uint8_t cid, int32_t event);
 
 public: /* methods */
 

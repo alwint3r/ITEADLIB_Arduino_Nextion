@@ -73,7 +73,6 @@ void NexTouch::iterate(NexTouchVector* touchVector, uint8_t pid, uint8_t cid, in
         e = touchVector->at(i);
 
         if (e->getObjPid() == pid && e->getObjCid() == cid) {
-            e->printObjInfo();
             if (NEX_EVENT_PUSH == event)
             {
                 e->push();

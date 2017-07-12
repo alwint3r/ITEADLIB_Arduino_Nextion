@@ -74,17 +74,6 @@ bool NexHardware::recvRetNumber(uint32_t *number, uint32_t timeout)
     }
 
 __return:
-
-    if (ret)
-    {
-        debugPrint("recvRetNumber :");
-        debugPrintln(*number);
-    }
-    else
-    {
-        debugPrintln("recvRetNumber err");
-    }
-
     return ret;
 }
 
@@ -151,13 +140,6 @@ uint16_t NexHardware::recvRetString(char *buffer, uint16_t len, uint32_t timeout
     strncpy(buffer, temp.c_str(), ret);
 
 __return:
-
-    debugPrint("recvRetString[");
-    debugPrint(temp.length());
-    debugPrint(",");
-    debugPrint(temp);
-    debugPrintln("]");
-
     return ret;
 }
 
@@ -209,15 +191,6 @@ bool NexHardware::recvRetCommandFinished(uint32_t timeout)
         ret = true;
     }
 
-    if (ret)
-    {
-        debugPrintln("recvRetCommandFinished ok");
-    }
-    else
-    {
-        debugPrintln("recvRetCommandFinished err");
-    }
-
     return ret;
 }
 
@@ -237,36 +210,19 @@ bool NexHardware::nexInit(void)
 void NexHardware::nexLoop(NexTouch::NexTouchVector* nex_listen_list)
 {
     static uint8_t __buffer[10];
-    char dbgBuf[255];
-    memset(dbgBuf, 0, 255);
 
     uint16_t i;
     uint8_t c;
 
-    while (nexSerial->available() > 0)
-    {
-        delay(10);
+    while (nexSerial->available() >= 6) {
+        for (i = 0; i < 8; i++) {
+            __buffer[i] = nexSerial->read();
+        }
 
-        if (nexSerial->available() >= 6) {
-            for (i = 0; i < 8; i++) {
-                __buffer[i] = nexSerial->read();
-            }
-
-            __buffer[i] = 0x00;
-
-            int j = 0;
-            for (j = 0; j < 8; j++) {
-                sprintf(dbgBuf, "0x%x", (uint16_t)__buffer[j]);
-                debugPrint(dbgBuf);
-                debugPrint(" ");
-            }
-
-            debugPrintln("");
-
-            if (NEX_RET_EVENT_TOUCH_HEAD == __buffer[0]) {
-                if (0xFF == __buffer[4] && 0xFF == __buffer[5] && 0xFF == __buffer[6]) {
-                    NexTouch::iterate(nex_listen_list, __buffer[1], __buffer[2], (int32_t)__buffer[3]);
-                }
+        __buffer[i] = 0x00;
+        if (NEX_RET_EVENT_TOUCH_HEAD == __buffer[0]) {
+            if (0xFF == __buffer[4] && 0xFF == __buffer[5] && 0xFF == __buffer[6]) {
+                NexTouch::iterate(nex_listen_list, __buffer[1], __buffer[2], (int32_t)__buffer[3]);
             }
         }
     }

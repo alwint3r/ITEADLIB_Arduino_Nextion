@@ -43,6 +43,7 @@ public: /* methods */
      * @return true if success, false for faileure.
      */
     bool show(void);
+    bool setBackgroundColor(uint32_t color);
 };
 /**
  * @}

@@ -23,8 +23,6 @@ NexPage::NexPage(NexHardware *hw, uint8_t pid, uint8_t cid, const char *name)
 
 bool NexPage::show(void)
 {
-    uint8_t buffer[4] = {0};
-
     const char *name = getObjName();
     if (!name)
     {
@@ -34,6 +32,24 @@ bool NexPage::show(void)
     String cmd = String("page ");
     cmd += name;
     hw->sendCommand(cmd.c_str());
+    return hw->recvRetCommandFinished();
+}
+
+bool NexPage::setBackgroundColor(uint32_t color) {
+    char buffer[10] = {0};
+    String cmd;
+
+    utoa(color, buffer, 10);
+    cmd += getObjName();
+    cmd += ".bco=";
+    cmd += buffer;
+    hw->sendCommand(cmd.c_str());
+
+    cmd = "";
+    cmd += "ref ";
+    cmd += getObjName();
+    hw->sendCommand(cmd.c_str());
+
     return hw->recvRetCommandFinished();
 }
 

@@ -66,20 +66,20 @@ void NexTouch::pop(void)
 
 void NexTouch::iterate(NexTouchVector* touchVector, uint8_t pid, uint8_t cid, int32_t event)
 {
-    NexTouch *e = NULL;
-    uint16_t i = 0;
+    NexTouch* touchable = nullptr;
 
-    for (i = 0; i < touchVector->size(); i++) {
-        e = touchVector->at(i);
 
-        if (e->getObjPid() == pid && e->getObjCid() == cid) {
+    for (NexTouchVector::iterator it = touchVector->begin(); it != touchVector->end(); ++it) {
+        touchable = *it;
+
+        if (touchable->getObjPid() == pid && touchable->getObjCid() == cid) {
             if (NEX_EVENT_PUSH == event)
             {
-                e->push();
+                touchable->push();
             }
             else if (NEX_EVENT_POP == event)
             {
-                e->pop();
+                touchable->pop();
             }
 
             break;
